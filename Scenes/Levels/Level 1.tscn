@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://u6uv82a6p7pm"]
+
+[node name="Level 1" type="Node3D"]
+
+[node name="GridMap" type="GridMap" parent="."]
+metadata/_editor_floor_ = Vector3(0, 0, 0)
