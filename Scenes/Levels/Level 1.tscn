@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://u6uv82a6p7pm"]
+[gd_scene load_steps=12 format=3 uid="uid://u6uv82a6p7pm"]
 
 [ext_resource type="MeshLibrary" uid="uid://8mh414bm3el8" path="res://Scenes/Levels/Libraries/library.tres" id="1_qv0vd"]
 [ext_resource type="PackedScene" uid="uid://chtvwwk07n0kn" path="res://Scenes/Players/player_1.tscn" id="2_4t3b5"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_vnbq0"]
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="4_nytic"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_e57xo"]
+[ext_resource type="Script" uid="uid://b8hhnqsugykly" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="6_e57xo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qv0vd"]
 
@@ -18,6 +22,26 @@ fog_density = 0.002
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.002
 
+[sub_resource type="Resource" id="Resource_d80xo"]
+script = ExtResource("5_e57xo")
+duration = 1.0
+transition = 0
+ease = 2
+
+[sub_resource type="Resource" id="Resource_gk1sg"]
+script = ExtResource("6_e57xo")
+keep_aspect = 1
+cull_mask = 1048575
+h_offset = 0.0
+v_offset = 0.0
+projection = 0
+fov = 80.0
+size = 1.0
+frustum_offset = Vector2(0, 0)
+near = 0.05
+far = 4000.0
+metadata/_custom_type_script = "uid://b8hhnqsugykly"
+
 [node name="Level 1" type="Node3D"]
 
 [node name="GridMap" type="GridMap" parent="."]
@@ -30,5 +54,38 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4t3b5")
 
-[node name="player_1" parent="." instance=ExtResource("2_4t3b5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.61005, 1.02003, -3.50668)
+[node name="Camera3D" type="Camera3D" parent="."]
+physics_interpolation_mode = 1
+transform = Transform3D(-0.999995, 9.19199e-08, -1.19792e-07, 0, 0.793349, 0.608759, 1.50995e-07, 0.608758, -0.79335, -4.7917e-07, 3.43503, -3.1734)
+fov = 80.0
+
+[node name="PhantomCameraHost" type="Node" parent="Camera3D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("3_vnbq0")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 0)
+
+[node name="players" type="Node3D" parent="."]
+
+[node name="player_1" parent="players" instance=ExtResource("2_4t3b5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="PhantomCamera3D" type="Node3D" parent="players" node_paths=PackedStringArray("follow_target")]
+transform = Transform3D(-0.999995, 9.19199e-08, -1.19792e-07, 0, 0.793349, 0.608759, 1.50995e-07, 0.608758, -0.79335, -4.7917e-07, 3.43503, -3.1734)
+top_level = true
+script = ExtResource("4_nytic")
+follow_mode = 5
+follow_target = NodePath("../player_1")
+tween_resource = SubResource("Resource_d80xo")
+tween_on_load = false
+camera_3d_resource = SubResource("Resource_gk1sg")
+follow_damping = true
+follow_distance = 4.0
+dead_zone_width = 0.161
+dead_zone_height = 0.386
+show_viewfinder_in_play = true
+spring_length = 4.0
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
