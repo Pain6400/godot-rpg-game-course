@@ -77,22 +77,13 @@ environment = SubResource("Environment_4t3b5")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 0)
 
-[node name="MainCamera3D" type="Camera3D" parent="."]
-physics_interpolation_mode = 1
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3.5, 4.33013)
-
-[node name="PhantomCameraHost" type="Node" parent="MainCamera3D"]
-process_priority = 300
-process_physics_priority = 300
-script = ExtResource("3_vnbq0")
-metadata/_custom_type_script = "uid://bd046eokvcnu2"
-
 [node name="player_1" parent="." instance=ExtResource("3_e57xo")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="PlayerPhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_target")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3.5, 4.33013)
+transform = Transform3D(-1, 0, 0, 0, 0.965016, 0.262189, 0, 0.262189, -0.965016, 0, 4.81095, -4.82508)
 script = ExtResource("4_nytic")
 priority = 10
 follow_mode = 6
@@ -100,23 +91,37 @@ follow_target = NodePath("../player_1")
 tween_resource = SubResource("Resource_gk1sg")
 tween_on_load = false
 camera_3d_resource = SubResource("Resource_d80xo")
+follow_offset = Vector3(0, 2.5, 0)
 follow_damping = true
 follow_distance = 5.0
-vertical_rotation_offset = 0.523599
+vertical_rotation_offset = 2.8763
 spring_length = 5.0
 metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
 [node name="PlayerAimPhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_target")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 1.101)
-rotation_order = 3
+transform = Transform3D(-1, 0, 0, 0, 0.984808, -0.173648, 0, -0.173648, -0.984808, -0.9, 2.23953, 0.722788)
 script = ExtResource("4_nytic")
 follow_mode = 6
 follow_target = NodePath("../player_1")
 tween_resource = SubResource("Resource_st7rb")
 tween_on_load = false
 camera_3d_resource = SubResource("Resource_ak4ck")
-follow_offset = Vector3(0, 0.8, -0.399)
+follow_offset = Vector3(-0.9, 1.5, 2.2)
 follow_distance = 1.5
+vertical_rotation_offset = 3.31613
 spring_length = 1.5
 metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="MainCamera3D" type="Camera3D" parent="."]
+unique_name_in_owner = true
+physics_interpolation_mode = 1
+transform = Transform3D(-1, 0, 0, 0, 0.965016, 0.262189, 0, 0.262189, -0.965016, 0, 4.81095, -4.82508)
+rotation_order = 0
+fov = 37.8493
+
+[node name="PhantomCameraHost" type="Node" parent="MainCamera3D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("3_vnbq0")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"

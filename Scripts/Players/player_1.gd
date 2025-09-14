@@ -4,12 +4,10 @@ extends CharacterBody3D
 @onready var _aim_pcam: PhantomCamera3D = %PlayerAimPhantomCamera3D
 
 
-@onready var _player_direction: Node3D = %PlayerDirection
-
 @export var mouse_sensitivity: float = 0.05
 
 @export var min_pitch: float = -89.9
-@export var max_pitch: float = 50
+@export var max_pitch: float = 40
 
 @export var min_yaw: float = 0
 @export var max_yaw: float = 360
@@ -25,7 +23,6 @@ func _physics_process(delta: float) -> void:
 
 	if velocity.length() > 0.2:
 		var look_direction: Vector2 = Vector2(velocity.z, velocity.x)
-		_player_direction.rotation.y = look_direction.angle()
 
 
 func _unhandled_input(event: InputEvent) -> void:
