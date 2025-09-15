@@ -5,7 +5,6 @@ extends CharacterBody3D
 @export var gravity: float = 9.8
 
 @onready var camera: Camera3D = $%MainCamera3D  # Ajusta esta ruta según tu escena
-@onready var player_direction: Node3D = $%PlayerDirection  # Ajusta esta ruta
 
 func _ready():
 	# Configurar acciones de input si no existen
@@ -55,7 +54,3 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
-	# Rotar el jugador en la dirección del movimiento
-	if velocity.length() > 0.2 and player_direction:
-		var look_direction = Vector2(velocity.z, velocity.x)
-		player_direction.rotation.y = look_direction.angle()

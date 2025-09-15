@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=4 uid="uid://u6uv82a6p7pm"]
+[gd_scene load_steps=119 format=4 uid="uid://u6uv82a6p7pm"]
 
 [ext_resource type="MeshLibrary" uid="uid://8mh414bm3el8" path="res://Scenes/Levels/Libraries/library.tres" id="1_qv0vd"]
 [ext_resource type="Script" uid="uid://vw58n2iagdvf" path="res://Scripts/Players/player_1.gd" id="3_gk1sg"]
@@ -23,6 +23,12 @@ fog_light_energy = 0.1
 fog_density = 0.002
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.002
+
+[sub_resource type="Resource" id="Resource_st7rb"]
+script = ExtResource("5_e57xo")
+duration = 1.0
+transition = 2
+ease = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2735h"]
 resource_name = "knight_texture"
@@ -31313,26 +31319,6 @@ near = 0.05
 far = 4000.0
 metadata/_custom_type_script = "uid://b8hhnqsugykly"
 
-[sub_resource type="Resource" id="Resource_st7rb"]
-script = ExtResource("5_e57xo")
-duration = 1.0
-transition = 0
-ease = 2
-
-[sub_resource type="Resource" id="Resource_ak4ck"]
-script = ExtResource("6_e57xo")
-keep_aspect = 1
-cull_mask = 1048575
-h_offset = 0.0
-v_offset = 0.0
-projection = 0
-fov = 75.0
-size = 1.0
-frustum_offset = Vector2(0, 0)
-near = 0.05
-far = 4000.0
-metadata/_custom_type_script = "uid://b8hhnqsugykly"
-
 [node name="Level 1" type="Node3D"]
 
 [node name="GridMap" type="GridMap" parent="."]
@@ -31350,7 +31336,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 
 [node name="player_1" type="CharacterBody3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(0.830683, 0, 0.556745, 0, 1, 0, -0.556745, 0, 0.830683, 0, 1, 0)
 collision_layer = 2
 script = ExtResource("3_gk1sg")
 metadata/_edit_group_ = true
@@ -31359,6 +31345,13 @@ metadata/_edit_group_ = true
 
 [node name="PlayerVisual" type="Node3D" parent="player_1/Knight"]
 unique_name_in_owner = true
+
+[node name="PlayerAimPhantomCamera3D" type="Node3D" parent="player_1/Knight/PlayerVisual"]
+transform = Transform3D(-0.993704, 0, 0.112041, 0, 1, 0, -0.112041, 0, -0.993704, -0.935022, 1.60878, 1.55276)
+script = ExtResource("4_nytic")
+tween_resource = SubResource("Resource_st7rb")
+tween_on_load = false
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
 [node name="Skeleton3D" type="Skeleton3D" parent="player_1/Knight/PlayerVisual"]
 bones/0/name = "root"
@@ -31828,11 +31821,11 @@ shape = SubResource("CapsuleShape3D_37lpg")
 
 [node name="PlayerPhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_target")]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, 0, 0, 0.965926, 0.258819, 0, 0.258819, -0.965926, 0, 4.7941, -3.82963)
+transform = Transform3D(-0.830683, 0.144098, -0.537774, -1.49012e-08, 0.965925, 0.258822, 0.556745, 0.214999, -0.802378, -2.68887, 4.79411, -3.01189)
 script = ExtResource("4_nytic")
 priority = 10
 follow_mode = 6
-follow_target = NodePath("../player_1/Knight/PlayerVisual")
+follow_target = NodePath("../player_1")
 tween_resource = SubResource("Resource_gk1sg")
 tween_on_load = false
 camera_3d_resource = SubResource("Resource_d80xo")
@@ -31843,25 +31836,10 @@ vertical_rotation_offset = 2.87979
 spring_length = 5.0
 metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
-[node name="PlayerAimPhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_target")]
-unique_name_in_owner = true
-transform = Transform3D(-1, 0, 0, 0, 0.984807, -0.173652, 0, -0.173652, -0.984807, -0.9, 2.23952, 0.72279)
-script = ExtResource("4_nytic")
-follow_mode = 6
-follow_target = NodePath("../player_1/Knight/PlayerVisual")
-tween_resource = SubResource("Resource_st7rb")
-tween_on_load = false
-camera_3d_resource = SubResource("Resource_ak4ck")
-follow_offset = Vector3(-0.9, 1.5, 2.2)
-follow_distance = 1.5
-vertical_rotation_offset = 3.31613
-spring_length = 1.5
-metadata/_custom_type_script = "uid://csjccrhj5wnx7"
-
 [node name="MainCamera3D" type="Camera3D" parent="."]
 unique_name_in_owner = true
 physics_interpolation_mode = 1
-transform = Transform3D(-1, 0, 0, 0, 0.965926, 0.258819, 0, 0.258819, -0.965926, 0, 4.7941, -3.82963)
+transform = Transform3D(-0.830683, 0.144098, -0.537774, -1.49012e-08, 0.965925, 0.258822, 0.556745, 0.214999, -0.802378, -2.68887, 4.79411, -3.01189)
 rotation_order = 0
 script = ExtResource("6_d80xo")
 
