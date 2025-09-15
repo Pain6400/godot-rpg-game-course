@@ -1,9 +1,12 @@
 extends Camera3D
 
 @onready var _player_pcam: PhantomCamera3D = %PlayerPhantomCamera3D
-@onready var player_aim_phantom_camera_3d: PhantomCamera3D = $"../player_1/Knight/PlayerVisual/PlayerAimPhantomCamera3D"
 
-@onready var player_1: CharacterBody3D = %player_1
+@onready var player_aim_phantom_camera_3d: PhantomCamera3D = $"../player_1/PlayerAimPhantomCamera3D"
+
+
+@onready var player_1: CharacterBody3D = $"../player_1"
+
 
 @export var mouse_sensitivity: float = 0.05
 @export var min_pitch: float = -89.9
@@ -14,7 +17,6 @@ extends Camera3D
 # Variables para guardar la configuración actual en lugar de la inicial
 var _current_spring_length: float
 var _current_rotation: Vector3
-var _is_aiming: bool = false
 
 func _ready() -> void:
 	if _player_pcam.get_follow_mode() == _player_pcam.FollowMode.THIRD_PERSON:
