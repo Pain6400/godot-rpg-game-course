@@ -3,8 +3,8 @@ extends CharacterBody3D
 @export var speed: float = 5.0
 @export var jump_force: float = 4.5
 @export var gravity: float = 9.8
-@export var run_speed: float = 8.0  # Velocidad para correr
-@export var attack_cooldown_time: float = 0.5  # Tiempo de espera entre ataques
+@export var run_speed: float = 8.0
+@export var attack_cooldown_time: float = 0.5
 
 @onready var camera: Camera3D = $%MainCamera3D
 @onready var animation_tree: AnimationTree = $AnimationTree
@@ -17,15 +17,13 @@ var is_running: bool = false
 var is_attacking: bool = false
 var is_dying: bool = false
 var attack_cooldown: float = 0.0
+var current_speed: float = 0.0
 
 func _ready():
-	# Configurar acciones de input si no existen
 	_setup_input_actions()
 	
-	# Inicializar el AnimationTree y obtener el playback
 	if animation_tree:
 		animation_tree.active = true
-		# Obtener el playback después de activar el AnimationTree
 		anim_state = animation_tree.get("parameters/playback")
 	else:
 		print("Error: AnimationTree no encontrado")
@@ -59,17 +57,16 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 	
 	# Manejar salto
-	if Input.is_action_just_pressed("jump") and on_floor:
+	if Input.is_action_just_pressed("jump") and on_floor and not is_attacking:
 		velocity.y = jump_force
-	
-	# Determinar si estamos corriendo
-	is_running = Input.is_action_pressed("run") and on_floor and not is_attacking
 	
 	# Determinar si estamos atacando
 	if Input.is_action_just_pressed("attack") and attack_cooldown <= 0 and on_floor and not is_dying:
 		is_attacking = true
 		attack_cooldown = attack_cooldown_time
-		# Aquí puedes agregar lógica de daño al atacar
+		# Forzar la animación de ataque
+		if anim_state:
+			anim_state.travel("Attack")
 	
 	# Obtener input de movimiento
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
@@ -83,9 +80,18 @@ func _physics_process(delta):
 		direction = direction.normalized()
 		
 		# Usar la velocidad de correr si corresponde
-		var current_speed = run_speed if is_running else speed
-		velocity.x = direction.x * current_speed
-		velocity.z = direction.z * current_speed
+		#if is_running:
+			#anim_state.travel("Run")
+			# Determinar si estamos corriendo (solo si estamos en el suelo y no atacando)
+		if Input.is_action_pressed("run") and on_floor and not is_attacking:
+			is_running = true
+			velocity.x = direction.x * run_speed
+			velocity.z = direction.z * run_speed
+		else:
+			is_running = false
+			velocity.x = direction.x * speed
+			velocity.z = direction.z * speed
+
 		
 		# Actualizar estado de caminata
 		is_walking = true
@@ -93,38 +99,40 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 		is_walking = false
+		
+	
 	
 	move_and_slide()
 	
-	# Actualizar animaciones
+
+	# Actualizar animaciones - USAR SET() EN LUGAR DE ASIGNACIÓN DIRECTA
 	if animation_tree:
+		print("Walking: ", is_walking, " | Running: ", is_running, " | Attacking: ", is_attacking, " | Dying: ", is_dying)
 		animation_tree.set("parameters/conditions/IsOnFloor", on_floor)
 		animation_tree.set("parameters/conditions/IsInAir", !on_floor)
 		animation_tree.set("parameters/conditions/IsWalking", is_walking and not is_running and not is_attacking)
-		animation_tree.set("parameters/conditions/IsNotWalking", not is_walking or is_running or is_attacking)
-		animation_tree.set("parameters/conditions/IsRunning", is_walking and is_running and not is_attacking)
-		animation_tree.set("parameters/conditions/IsNotRunning", not is_running or not is_walking or is_attacking)
-		animation_tree.set("parameters/conditions/IsAttacking", is_attacking)
-		animation_tree.set("parameters/conditions/IsNotAttacking", not is_attacking)
+		animation_tree.set("parameters/conditions/IsNotWalking", not is_walking)
+		animation_tree.set("parameters/conditions/IsRunning",  is_walking and is_running and not is_attacking)
+		animation_tree.set("parameters/conditions/IsNotRunning", not is_running)
 		animation_tree.set("parameters/conditions/IsDying", is_dying)
 	
 	# Reiniciar el estado de ataque después de un tiempo
-	if is_attacking and attack_cooldown <= attack_cooldown_time * 0.8:  # Permitir que la animación se reproduzca un poco
+	if is_attacking and attack_cooldown <= attack_cooldown_time * 0.8:
 		is_attacking = false
 
 # Función para manejar la muerte del personaje
 func die():
 	is_dying = true
-	# Deshabilitar el movimiento y otras acciones
+	if anim_state:
+		anim_state.travel("Death")
 	set_physics_process(false)
 
 # Función para revivir el personaje
 func revive():
 	is_dying = false
-	# Habilitar el movimiento y otras acciones
 	set_physics_process(true)
 
 # Señal para detectar cuando una animación termina (conectar en el editor)
 func _on_animation_finished(anim_name):
-	if anim_name == "Attack":  # Reemplaza con el nombre real de tu animación de ataque
+	if anim_name == "Attack":
 		is_attacking = false
