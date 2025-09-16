@@ -111,7 +111,7 @@ func _physics_process(delta):
 		animation_tree.set("parameters/conditions/IsOnFloor", on_floor)
 		animation_tree.set("parameters/conditions/IsInAir", !on_floor)
 		animation_tree.set("parameters/conditions/IsWalking", is_walking and not is_running and not is_attacking)
-		animation_tree.set("parameters/conditions/IsNotWalking", not is_walking)
+		animation_tree.set("parameters/conditions/IsNotWalking", not is_walking )
 		animation_tree.set("parameters/conditions/IsRunning",  is_walking and is_running and not is_attacking)
 		animation_tree.set("parameters/conditions/IsNotRunning", not is_running)
 		animation_tree.set("parameters/conditions/IsDying", is_dying)
