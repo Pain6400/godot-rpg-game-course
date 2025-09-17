@@ -12,7 +12,7 @@ config_version=5
 
 config/name="godot-rpg-game-course"
 run/main_scene="uid://u6uv82a6p7pm"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -22,6 +22,11 @@ PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_came
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
+
+[global_group]
+
+Monsters=""
+Players=""
 
 [input]
 

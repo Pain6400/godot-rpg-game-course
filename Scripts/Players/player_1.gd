@@ -107,7 +107,6 @@ func _physics_process(delta):
 
 	# Actualizar animaciones - USAR SET() EN LUGAR DE ASIGNACIÓN DIRECTA
 	if animation_tree:
-		print("Walking: ", is_walking, " | Running: ", is_running, " | Attacking: ", is_attacking, " | Dying: ", is_dying)
 		animation_tree.set("parameters/conditions/IsOnFloor", on_floor)
 		animation_tree.set("parameters/conditions/IsInAir", !on_floor)
 		animation_tree.set("parameters/conditions/IsWalking", is_walking and not is_running and not is_attacking)
