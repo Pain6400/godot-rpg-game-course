@@ -5,18 +5,18 @@ var run: bool
 
 func _ready() -> void:
 	AIController = get_parent().get_parent()
-	if AIController.attack:
+	if AIController.attacking:
 		await  AIController.get_node("AnimationTree").animation_finished
-		AIController.attack = false
+		AIController.attacking = false
 		
 	else:
 		run = false
 		AIController.get_node("AnimationTree").get("parameters/playback").travel("Awaken")
-		AIController.Awaken = true
+		AIController.Awakening = true
 		await  AIController.get_node("AnimationTree").animation_finished
 	
 	run = true
-	AIController.Awaken = false
+	AIController.Awakening = false
 	AIController.get_node("AnimationTree").get("parameters/playback").travel("Run")
 	
 func _physics_process(delta: float) -> void:

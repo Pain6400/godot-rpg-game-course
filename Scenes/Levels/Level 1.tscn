@@ -48,7 +48,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 
 [node name="PlayerPhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_target")]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, 0, 0, 0.965925, 0.25882214, 0, 0.25882214, -0.965925, -0.556477, 4.814141, -4.885855)
+transform = Transform3D(-1, 0, 0, 0, 0.965925, 0.25882214, 0, 0.25882214, -0.965925, -0.556477, 4.814141, -12.349035)
 script = ExtResource("4_nytic")
 priority = 10
 follow_mode = 6
@@ -66,7 +66,7 @@ metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 [node name="MainCamera3D" type="Camera3D" parent="."]
 unique_name_in_owner = true
 physics_interpolation_mode = 1
-transform = Transform3D(-1, 0, 0, 0, 0.965925, 0.25882214, 0, 0.25882214, -0.965925, -0.556477, 4.814141, -4.885855)
+transform = Transform3D(-1, 0, 0, 0, 0.965925, 0.25882214, 0, 0.25882214, -0.965925, -0.556477, 4.814141, -12.349035)
 rotation_order = 0
 script = ExtResource("6_d80xo")
 
@@ -77,7 +77,8 @@ script = ExtResource("3_vnbq0")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="player_1" parent="." instance=ExtResource("7_d80xo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.556477, 1.02003, -1.05623)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.556477, 1.02003, -8.51941)
 
-[node name="skeleton_warrior_monster" parent="." instance=ExtResource("8_gk1sg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9726181, 1.1550586, 5.554388)
+[node name="skeleton_warrior_monster" parent="." node_paths=PackedStringArray("player_1") instance=ExtResource("8_gk1sg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9726181, 1.1550586, 4.8958273)
+player_1 = NodePath("../player_1")

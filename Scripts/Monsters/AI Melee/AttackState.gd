@@ -3,10 +3,10 @@ extends Node
 var AIController
 func _ready() -> void:
 	AIController = get_parent().get_parent()
-	if AIController.Awaken:
+	if AIController.Awakening:
 		await  AIController.get_node("AnimationTree").animation_finished
 	
-	AIController.attack = true
+	AIController.attacking = true
 	AIController.get_node("AnimationTree").get("parameters/playback").travel("Attack")
 	AIController.look_at(AIController.global_transform.origin + AIController.direction, Vector3(0,1,0))
 	
