@@ -5,7 +5,8 @@ var state = {
 	"Idle": preload("res://Scripts/Monsters/AI Melee/IdleState.gd"),
 	"Run": preload("res://Scripts/Monsters/AI Melee/RunState.gd"),
 	"Attack": preload("res://Scripts/Monsters/AI Melee/AttackState.gd"),
-	"Death": preload("res://Scripts/Monsters/AI Melee/DeathState.gd")
+	"Death": preload("res://Scripts/Monsters/AI Melee/DeathState.gd"),
+	"Search": preload("res://Scripts/Monsters/AI Melee/SearchState.gd")
 }
 
 func change_state(new_state: String):

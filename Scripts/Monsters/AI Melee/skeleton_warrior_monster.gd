@@ -8,11 +8,12 @@ var speed: float = 1.0
 var direction: Vector3
 var Awakening: bool = false
 var attacking: bool = false
+var searching: bool = false
 var health: int = 4
 var damage: int = 2
 var dying: bool = false
 var just_hit: bool = false
-
+var last_known_player_position: Vector3
 
 func _ready() -> void:
 	state_machine.change_state("Idle")
@@ -33,7 +34,9 @@ func _on_chase_player_detection_body_entered(body: Node3D) -> void:
 
 func _on_chase_player_detection_body_exited(body: Node3D) -> void:
 	if body.is_in_group("Players") and !dying:
-		state_machine.change_state("Idle")
+		if player_1:
+			last_known_player_position = player_1.global_transform.origin
+		state_machine.change_state("Search")
 
 
 func _on_attack_player_detection_body_entered(body: Node3D) -> void:
