@@ -1,4 +1,4 @@
-[gd_scene load_steps=150 format=4 uid="uid://tvowsegxspw2"]
+[gd_scene load_steps=144 format=4 uid="uid://tvowsegxspw2"]
 
 [ext_resource type="Script" uid="uid://biv3c3u2pkl4m" path="res://Scripts/Monsters/AI Melee/skeleton_warrior_monster.gd" id="1_822oi"]
 [ext_resource type="Texture2D" uid="uid://bckh24ea588fk" path="res://Assets/KayKit_Skeletons_1.0_FREE/KayKit_Skeletons_1.0_FREE/characters/fbx/skeleton_texture.png" id="1_tot8r"]
@@ -82748,7 +82748,6 @@ tracks/123/keys = PackedFloat32Array(0, 1, 1, 1, 1)
 [sub_resource type="Animation" id="Animation_rphki"]
 resource_name = "Walking_D_Skeletons"
 length = 1.6
-loop_mode = 1
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -83738,9 +83737,6 @@ animation = &"Idle_Combat"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hikt6"]
 animation = &"Running_A"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s27r5"]
-animation = &"Walking_D_Skeletons"
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s27r5"]
 xfade_time = 0.2
 advance_mode = 2
@@ -83794,26 +83790,11 @@ advance_mode = 0
 xfade_time = 0.2
 advance_mode = 0
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v7bae"]
-advance_mode = 0
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_01mhj"]
-advance_mode = 0
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vt2c2"]
-advance_mode = 0
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lb253"]
-advance_mode = 0
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hv1mq"]
-advance_mode = 0
-
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bj2ya"]
 states/Attack/node = SubResource("AnimationNodeAnimation_vt2c2")
 states/Attack/position = Vector2(491, 56)
 states/Awaken/node = SubResource("AnimationNodeAnimation_lb253")
-states/Awaken/position = Vector2(318, 168.0494)
+states/Awaken/position = Vector2(287, 204.0494)
 states/Death/node = SubResource("AnimationNodeAnimation_bj2ya")
 states/Death/position = Vector2(385, -71)
 states/Idle/node = SubResource("AnimationNodeAnimation_qbvfh")
@@ -83822,11 +83803,9 @@ states/Idle_Combat/node = SubResource("AnimationNodeAnimation_hv1mq")
 states/Idle_Combat/position = Vector2(745, 56)
 states/Run/node = SubResource("AnimationNodeAnimation_hikt6")
 states/Run/position = Vector2(491, 204.0494)
-states/Search/node = SubResource("AnimationNodeAnimation_s27r5")
-states/Search/position = Vector2(147, 260.04938)
 states/Start/position = Vector2(94, 63)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_s27r5"), "Idle", "Awaken", SubResource("AnimationNodeStateMachineTransition_ueu58"), "Awaken", "Idle", SubResource("AnimationNodeStateMachineTransition_ml8j4"), "Awaken", "Run", SubResource("AnimationNodeStateMachineTransition_kcugf"), "Run", "Awaken", SubResource("AnimationNodeStateMachineTransition_sbsu8"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_k66nb"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_yydoq"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_chxgg"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_0jx1m"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_cjaen"), "Attack", "Idle_Combat", SubResource("AnimationNodeStateMachineTransition_47usw"), "Idle_Combat", "Attack", SubResource("AnimationNodeStateMachineTransition_jriba"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_qbvfh"), "Run", "Search", SubResource("AnimationNodeStateMachineTransition_v7bae"), "Search", "Run", SubResource("AnimationNodeStateMachineTransition_01mhj"), "Search", "Awaken", SubResource("AnimationNodeStateMachineTransition_vt2c2"), "Awaken", "Search", SubResource("AnimationNodeStateMachineTransition_lb253"), "Search", "Idle", SubResource("AnimationNodeStateMachineTransition_hv1mq")]
-graph_offset = Vector2(0, 23.52718)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_s27r5"), "Idle", "Awaken", SubResource("AnimationNodeStateMachineTransition_ueu58"), "Awaken", "Idle", SubResource("AnimationNodeStateMachineTransition_ml8j4"), "Awaken", "Run", SubResource("AnimationNodeStateMachineTransition_kcugf"), "Run", "Awaken", SubResource("AnimationNodeStateMachineTransition_sbsu8"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_k66nb"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_yydoq"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_chxgg"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_0jx1m"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_cjaen"), "Attack", "Idle_Combat", SubResource("AnimationNodeStateMachineTransition_47usw"), "Idle_Combat", "Attack", SubResource("AnimationNodeStateMachineTransition_jriba"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_qbvfh")]
+graph_offset = Vector2(0, -10.145245)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vt2c2"]
 radius = 6.758301
