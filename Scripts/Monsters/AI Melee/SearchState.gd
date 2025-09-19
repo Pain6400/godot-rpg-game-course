@@ -5,17 +5,10 @@ var AIController
 var search_time: float = 5.0
 var current_search_time: float = 0.0
 var search_radius: float = 3.0
-var target_position: Vector3
 var reached_target: bool = false
 
 func _ready() -> void:
 	AIController = get_parent().get_parent()
-	
-	# Guardar la última posición conocida del jugador
-	if AIController.player_1:
-		target_position = AIController.player_1.global_transform.origin
-	else:
-		target_position = AIController.global_transform.origin
 	
 	AIController.get_node("AnimationTree").get("parameters/playback").travel("Search")
 	current_search_time = 0.0
@@ -33,7 +26,7 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	# Calcular dirección hacia el objetivo
-	var direction_to_target = (target_position - AIController.global_transform.origin).normalized()
+	var direction_to_target = (AIController.last_known_player_position - AIController.global_transform.origin).normalized()
 	direction_to_target.y = 0
 	
 	# Mover hacia el objetivo
@@ -45,7 +38,7 @@ func _physics_process(delta: float) -> void:
 		AIController.look_at(AIController.global_transform.origin + direction_to_target, Vector3.UP)
 	
 	# Verificar si llegó al objetivo
-	var distance_to_target = AIController.global_transform.origin.distance_to(target_position)
+	var distance_to_target = AIController.global_transform.origin.distance_to(AIController.last_known_player_position)
 	if distance_to_target < 0.5 and not reached_target:
 		reached_target = true
 		start_search_pattern()
@@ -58,13 +51,13 @@ func start_search_pattern():
 			
 		var random_angle = randf() * 2 * PI
 		var random_distance = randf() * search_radius
-		var new_target = target_position + Vector3(
+		var new_target = AIController.last_known_player_position + Vector3(
 			cos(random_angle) * random_distance,
 			0,
 			sin(random_angle) * random_distance
 		)
 		
-		target_position = new_target
+		AIController.last_known_player_position = new_target
 		reached_target = false
 		
 		# Esperar en cada punto de búsqueda
