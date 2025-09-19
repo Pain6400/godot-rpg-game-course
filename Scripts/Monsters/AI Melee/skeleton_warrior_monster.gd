@@ -15,6 +15,7 @@ var just_hit: bool = false
 
 
 func _ready() -> void:
+	await get_tree().process_frame
 	state_machine.change_state("Idle")
 	
 func _physics_process(delta: float) -> void:
@@ -28,12 +29,31 @@ func _physics_process(delta: float) -> void:
 
 func _on_chase_player_detection_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Players") and !dying:
+		print("Jugador detectado en área de persecución")
+		
+		# Si estamos en estado de búsqueda, interrumpirlo inmediatamente
+		if state_machine.current_state != null and state_machine.current_state.name == "Search":
+			state_machine.current_state.cleanup()
+		
 		state_machine.change_state("Run")
 
 
 func _on_chase_player_detection_body_exited(body: Node3D) -> void:
 	if body.is_in_group("Players") and !dying:
-		state_machine.change_state("Idle")
+		print("Jugador salió del área de persecución")
+		
+		# Verificar si todavía hay otros jugadores en el área
+		var overlapping_bodies = $chase_player_detection.get_overlapping_bodies()
+		var other_players_in_area = false
+		
+		for overlapping_body in overlapping_bodies:
+			if overlapping_body.is_in_group("Players") and overlapping_body != body:
+				other_players_in_area = true
+				break
+
+		# Solo cambiar a búsqueda si no hay otros jugadores en el área
+		if not other_players_in_area:
+			state_machine.change_state("Search")
 
 
 func _on_attack_player_detection_body_entered(body: Node3D) -> void:
