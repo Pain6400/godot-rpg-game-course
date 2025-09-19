@@ -5,6 +5,8 @@ var speed: float = 1.0
 @onready var state_machine: Node = $StateMachine
 @export var player_1: CharacterBody3D
 @onready var attack_player_detection: Area3D = $attack_player_detection
+@onready var just_hit_Timer: Timer = $Just_Hit
+
 var direction: Vector3
 var Awakening: bool = false
 var attacking: bool = false
@@ -60,3 +62,25 @@ func _on_attack_player_detection_body_exited(body: Node3D) -> void:
 
 func death():
 	self.queue_free()
+
+func hit(demage: int):
+	print("vida: ",health)
+	print("demage: ",demage)
+	print("just_hit: ",just_hit)
+	if !just_hit:
+		just_hit = true
+		just_hit_Timer.start()
+		health -=demage
+		print(health)
+		if health < 1:
+			state_machine.change_state("Death")
+			
+		var tween = create_tween()
+		tween.tween_property(self, "global_position", global_position - (direction/1.5), 0.2)
+
+func _on_demage_detecter_body_entered(body: Node3D) -> void:
+	pass # Replace with function body.
+
+
+func _on_just_hit_timeout() -> void:
+	just_hit = false

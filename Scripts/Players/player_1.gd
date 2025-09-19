@@ -135,3 +135,8 @@ func revive():
 func _on_animation_finished(anim_name):
 	if anim_name == "Attack":
 		is_attacking = false
+
+
+func _on_demage_detector_body_entered(body: Node3D) -> void:
+	if body.is_in_group("Monsters") and is_attacking:
+		body.hit(2)
