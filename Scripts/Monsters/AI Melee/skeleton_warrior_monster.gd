@@ -51,22 +51,19 @@ func _on_attack_player_detection_body_exited(body: Node3D) -> void:
 		state_machine.change_state("Run")
 
 
-#func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
-	#if "Awaken" in anim_name:
-		#Awakening = false
-	#elif "Attack" in anim_name:
-		#if(player_1 in attack_player_detection.get_overlapping_bodies() and !dying):
-			#state_machine.change_state("Attack")
-	#elif "Death" in anim_name:
-		#death()
+func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
+	if "Awaken" in anim_name:
+		Awakening = false
+	elif "Attack" in anim_name:
+		if(player_1 in attack_player_detection.get_overlapping_bodies() and !dying):
+			state_machine.change_state("Attack")
+	elif "Death" in anim_name:
+		death()
 
 func death():
 	self.queue_free()
 
 func hit(demage: int):
-	print("vida: ",health)
-	print("demage: ",demage)
-	print("just_hit: ",just_hit)
 	if !just_hit:
 		just_hit = true
 		just_hit_Timer.start()
@@ -79,7 +76,8 @@ func hit(demage: int):
 		tween.tween_property(self, "global_position", global_position - (direction/1.5), 0.2)
 
 func _on_demage_detecter_body_entered(body: Node3D) -> void:
-	pass # Replace with function body.
+	if body.is_in_group("Players") and attacking:
+		body.hitPlayer(10)
 
 
 func _on_just_hit_timeout() -> void:

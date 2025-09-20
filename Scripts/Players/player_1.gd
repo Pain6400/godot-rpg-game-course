@@ -8,6 +8,7 @@ extends CharacterBody3D
 
 @onready var camera: Camera3D = $%MainCamera3D
 @onready var animation_tree: AnimationTree = $AnimationTree
+@onready var just_hit_timer_player: Timer = $just_hit
 
 var anim_state: AnimationNodeStateMachinePlayback
 
@@ -18,6 +19,8 @@ var is_attacking: bool = false
 var is_dying: bool = false
 var attack_cooldown: float = 0.0
 var current_speed: float = 0.0
+var just_hit_playe: bool = false
+var health_player: int = 100
 
 func _ready():
 	_setup_input_actions()
@@ -140,3 +143,16 @@ func _on_animation_finished(anim_name):
 func _on_demage_detector_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Monsters") and is_attacking:
 		body.hit(2)
+		
+func hitPlayer(demage: int):
+	if !just_hit_playe:
+		just_hit_playe = true
+		just_hit_timer_player.start()
+		health_player -=demage
+		print(health_player)
+		if health_player < 1:
+			is_dying = true
+
+
+func _on_just_hit_timeout() -> void:
+	just_hit_playe = false
