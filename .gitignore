@@ -1,3 +1,34 @@
-# Godot 4+ specific ignores
+# Godot 4+ (y versiones recientes)
 .godot/
+.import/
 /android/
+export.cfg
+export_presets.cfg
+
+# Godot 3 (legacy, si usas versiones antiguas)
+# godot.cfg
+# import/
+
+# Archivos exportados/binarios (ejecutables, builds)
+export/
+*.exe
+*.pck
+*.apk
+*.aab
+
+# Archivos temporales del sistema
+*.tmp
+*.bak
+*.swp
+*~
+
+# Configuración del editor/IDE (opcional)
+.vscode/
+.idea/
+
+# Dependencias (si usas paquetes externos, ej. GDExtension)
+# /addons/  # ¡Cuidado! Normalmente los addons SÍ se versionan, a menos que sean auto-generados.
+
+# Logs y metadatos de control de versiones
+logs/
+*.log

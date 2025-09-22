@@ -78,11 +78,6 @@ metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="player_1" parent="." instance=ExtResource("7_d80xo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.556477, 1.02003, -8.51941)
-speed = null
-jump_force = null
-gravity = null
-run_speed = null
-attack_cooldown_time = null
 
 [node name="skeleton_warrior_monster" parent="." node_paths=PackedStringArray("player_1") instance=ExtResource("8_gk1sg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9726181, 1.1550586, 4.8958273)
