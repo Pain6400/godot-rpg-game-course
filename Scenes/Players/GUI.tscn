@@ -1,12 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8esmat0dxy1i"]
+[gd_scene load_steps=3 format=3 uid="uid://b8esmat0dxy1i"]
 
 [ext_resource type="Theme" uid="uid://dof4dkx3ger2s" path="res://Assets/default_2.tres" id="1_3k7xp"]
+[ext_resource type="Script" uid="uid://ce6ymohi10du7" path="res://Scripts/Players/gui.gd" id="1_r0gik"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="Game_Over" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_r0gik")
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = 165.0
-offset_top = 84.0
-offset_right = 777.0
-offset_bottom = 326.0
+offset_left = 88.0
+offset_top = 80.0
+offset_right = 1085.0
+offset_bottom = 556.0
 theme = ExtResource("1_3k7xp")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 101.0
+offset_top = 84.0
+offset_right = 1072.0
+offset_bottom = 320.0
+theme_override_constants/paragraph_spacing = 5
+theme_override_constants/shadow_offset_x = 7
+theme_override_constants/shadow_offset_y = 7
+theme_override_constants/outline_size = 19
+theme_override_font_sizes/font_size = 57
+text = "Game Over 
+Try Again"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="retry_btn" type="Button" parent="."]
+offset_left = 477.0
+offset_top = 324.0
+offset_right = 645.0
+offset_bottom = 364.0
+text = "Retry"
+
+[connection signal="pressed" from="retry_btn" to="." method="_on_retry_btn_pressed"]

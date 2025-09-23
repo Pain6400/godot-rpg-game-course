@@ -77,7 +77,7 @@ func hit(demage: int):
 
 func _on_demage_detecter_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Players") and attacking:
-		body.hitPlayer(10)
+		body.hitPlayer(25)
 
 
 func _on_just_hit_timeout() -> void:

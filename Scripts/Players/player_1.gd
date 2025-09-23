@@ -9,6 +9,7 @@ extends CharacterBody3D
 @onready var camera: Camera3D = $%MainCamera3D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var just_hit_timer_player: Timer = $just_hit
+@onready var game_over: CanvasLayer = $"../GameOver"
 
 var anim_state: AnimationNodeStateMachinePlayback
 
@@ -156,3 +157,9 @@ func hitPlayer(demage: int):
 
 func _on_just_hit_timeout() -> void:
 	just_hit_playe = false
+
+
+func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
+	if "Death" in anim_name:
+		await  get_tree().create_timer(1).timeout
+		game_over.game_over()
