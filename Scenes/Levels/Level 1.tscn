@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://u6uv82a6p7pm"]
+[gd_scene load_steps=16 format=3 uid="uid://u6uv82a6p7pm"]
 
 [ext_resource type="MeshLibrary" uid="uid://8mh414bm3el8" path="res://Scenes/Levels/Libraries/library.tres" id="1_qv0vd"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_vnbq0"]
@@ -8,7 +8,8 @@
 [ext_resource type="Script" uid="uid://b8hhnqsugykly" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="6_e57xo"]
 [ext_resource type="PackedScene" uid="uid://chtvwwk07n0kn" path="res://Scenes/Players/player_1.tscn" id="7_d80xo"]
 [ext_resource type="PackedScene" uid="uid://tvowsegxspw2" path="res://Scenes/Monsters/skeleton_warrior_monster.tscn" id="8_gk1sg"]
-[ext_resource type="PackedScene" uid="uid://b8esmat0dxy1i" path="res://Scenes/Players/GUI.tscn" id="9_st7rb"]
+[ext_resource type="PackedScene" uid="uid://b8esmat0dxy1i" path="res://Scenes/Players/GUI/Game_Over.tscn" id="9_st7rb"]
+[ext_resource type="PackedScene" uid="uid://co5xr34mobgjy" path="res://Scenes/Players/GUI/gui.tscn" id="10_ak4ck"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qv0vd"]
 
@@ -85,3 +86,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9726181, 1.1550586, 4.8958
 player_1 = NodePath("../player_1")
 
 [node name="GameOver" parent="." instance=ExtResource("9_st7rb")]
+
+[node name="GUI" parent="." instance=ExtResource("10_ak4ck")]
