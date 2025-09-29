@@ -7,6 +7,8 @@ extends CharacterBody3D
 @export var attack_cooldown_time: float = 0.5
 
 @onready var camera: Camera3D = $%MainCamera3D
+@onready var player_aim_phantom_camera_3d: PhantomCamera3D = $PlayerAimPhantomCamera3D
+
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var just_hit_timer_player: Timer = $just_hit
 @onready var game_over: CanvasLayer = $"../GameOver"
@@ -77,10 +79,10 @@ func _physics_process(delta):
 	var direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
 	
 	# Convertir la dirección al espacio de la cámara
-	if direction.length() > 0 and camera and not is_attacking and not is_dying:
-		var camera_basis = camera.global_transform.basis
+	if direction.length() > 0 and player_aim_phantom_camera_3d and not is_attacking and not is_dying:
+		var camera_basis = player_aim_phantom_camera_3d.global_transform.basis
 		direction = camera_basis * direction
-		direction.y = 0
+		#direction.y = 0
 		direction = direction.normalized()
 		
 		# Usar la velocidad de correr si corresponde
