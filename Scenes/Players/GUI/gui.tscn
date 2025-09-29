@@ -6,22 +6,50 @@
 process_mode = 3
 script = ExtResource("1_pbt5x")
 
-[node name="containter" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Panel" type="Panel" parent="containter"]
-layout_mode = 0
-offset_left = 56.0
-offset_top = 56.0
-offset_right = 1112.0
-offset_bottom = 624.0
-
 [node name="hp_bar" type="ProgressBar" parent="."]
 offset_left = 72.0
 offset_top = 8.0
 offset_right = 312.0
 offset_bottom = 48.0
 value = 50.0
+
+[node name="containter" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BG" type="Panel" parent="containter"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 64.0
+offset_right = 1112.0
+offset_bottom = 632.0
+
+[node name="inventory" type="Control" parent="containter"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="profile" type="Control" parent="containter"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="containter"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 168.0
+offset_right = 296.0
+offset_bottom = 264.0
+
+[node name="inventoty_button" type="Button" parent="containter/VBoxContainer"]
+layout_mode = 2
+text = "Inventory"
+
+[node name="profile_button" type="Button" parent="containter/VBoxContainer"]
+layout_mode = 2
+text = "Profile"
+
+[connection signal="pressed" from="containter/VBoxContainer/inventoty_button" to="." method="_on_inventoty_button_pressed"]
+[connection signal="pressed" from="containter/VBoxContainer/profile_button" to="." method="_on_profile_button_pressed"]
