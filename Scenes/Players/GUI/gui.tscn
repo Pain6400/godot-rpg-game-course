@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://co5xr34mobgjy"]
+[gd_scene load_steps=3 format=3 uid="uid://co5xr34mobgjy"]
 
 [ext_resource type="Script" uid="uid://bwvuupt5b84wu" path="res://Scripts/Players/GUI/gui.gd" id="1_pbt5x"]
+[ext_resource type="PackedScene" uid="uid://d07m6s3vk1jay" path="res://Scenes/Players/GUI/Inventoy/inventory.tscn" id="2_ru12p"]
 
 [node name="GUI" type="CanvasLayer"]
 process_mode = 3
@@ -26,10 +27,8 @@ offset_top = 64.0
 offset_right = 1112.0
 offset_bottom = 632.0
 
-[node name="inventory" type="Control" parent="containter"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="inventory" parent="containter" instance=ExtResource("2_ru12p")]
+layout_mode = 0
 
 [node name="profile" type="Control" parent="containter"]
 anchors_preset = 0
