@@ -30,6 +30,9 @@ offset_bottom = 632.0
 [node name="inventory" parent="containter" instance=ExtResource("2_ru12p")]
 layout_mode = 0
 
+[node name="inventory" parent="containter/inventory" instance=ExtResource("2_ru12p")]
+layout_mode = 0
+
 [node name="profile" type="Control" parent="containter"]
 anchors_preset = 0
 offset_right = 40.0
