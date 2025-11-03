@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bjykmaka0gf8v"]
+
+[ext_resource type="Texture2D" uid="uid://b8y10ggrfdg0e" path="res://Assets/16x16 RPG Item Pack/Item__31.png" id="1_f04b2"]
+[ext_resource type="Script" uid="uid://cifj7khctjna0" path="res://Scripts/Players/GUI/Inventory/item_data.gd" id="2_kss8e"]
+
+[resource]
+script = ExtResource("2_kss8e")
+item_health = 5
+stackable = true
+count = 1
+description = "This is a small potion that heals you!"
+item_texture = ExtResource("1_f04b2")
